@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- ============================================================
+         MENU � FIX 3 (filter works) + FIX 4 (plus opens popup)
+         ============================================================ -->
+<section id="menu">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="slbl">What's Cooking</span>
+            <h2 class="stitle">Our Delicious <span>Menu</span></h2>
+            <div class="sline"></div>
+        </div>
+        <!-- FIX 3 � filter buttons -->
+        <div class="text-center mb-4" data-aos="fade-up">
+            <button class="filtbtn active" data-f="all">All</button>
+            <button class="filtbtn" data-f="burgers">Burgers</button>
+            <button class="filtbtn" data-f="momo">MoMo</button>
+            <button class="filtbtn" data-f="chicken">Chicken</button>
+            <button class="filtbtn" data-f="wraps">Wraps</button>
+            <button class="filtbtn" data-f="desserts">Desserts</button>
+            <button class="filtbtn" data-f="pasta">Pasta</button>
+
+        </div>
+        <div class="row g-4" id="mgrid">
+            <!-- CARD 1: Burgers -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="burgers" data-aos="fade-up">
+                <div class="mcard" data-img="{% static 'images/menu/1.jpg' %}" data-title="Classic Smash Burger"
+                    data-cat="Burgers" data-price="$14.99" data-old="$18.99" data-rating="4.9" data-reviews="128"
+                    data-cal="620" data-time="12"
+                    data-desc="Double smashed patty, cheddar cheese, caramelized onions, house pickles and our legendary special sauce. Made fresh to order on a toasted brioche bun."
+                    data-tags="Spicy,Bestseller,Beef">
+                    <div class="mimg">
+                        <img src="{% static 'images/menu/1.jpg' %}" alt="Smash Burger" />
+                        <div class="mbdg hot"><i class="fas fa-star"></i> Hot</div>
+                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="mbody">
+                        <div class="mcat">Burgers</div>
+                        <div class="mtit">Classic Smash Burger</div>
+                        <div class="mdesc">Double smashed patty, cheddar, caramelized onions, pickles &amp; special
+                            sauce</div>
+                        <div class="mfoot">
+                            <div>
+                                <div class="mprice">Rs 250 <small>Rs 380</small></div>
+                                <div class="mstars"><i class="fas fa-star"></i> <span
+                                        style="color:#bbb;font-size:.7rem;">(128)</span></div>
+                            </div>
+                            <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 2: momo -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="momo" data-aos="fade-up" data-aos-delay="80">
+                <div class="mcard" data-img="{% static 'images/menu/momo.jpg' %}" data-title="Authentic Jhol Momo"
+                    data-cat="Momo" data-price="Rs 150" data-old="Rs 200" data-rating="4.9" data-reviews="185"
+                    data-cal="420" data-time="20"
+                    data-desc="Soft handmade steamed momos served in a rich, spicy sesame and tomato-based jhol, infused with authentic Nepali herbs and aromatic spices."
+                    data-tags="Popular,Spicy,Nepali">
+                    <div class="mimg">
+                        <img src="{% static 'images/menu/momo.jpg' %}" alt="Jhol Momo" />
+                        <div class="mbdg new"><i class="fas fa-star"></i> Popular</div>
+                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="mbody">
+                        <div class="mcat">Jhol Momo</div>
+                        <div class="mtit">Authentic Jhol Momo</div>
+                        <div class="mdesc">Steamed momos served with a flavorful spicy sesame and tomato jhol.</div>
+                        <div class="mfoot">
+                            <div>
+                                <div class="mprice">Rs 150 <small>Rs 200</small></div>
+                                <div class="mstars"><i class="fas fa-star"></i> <span
+                                        style="color:#bbb;font-size:.7rem;">(185)</span></div>
+                            </div>
+                            <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 3: Chicken -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="chicken" data-aos="fade-up" data-aos-delay="160">
+                <div class="mcard" data-img="{% static 'images/menu/3.jpg' %}" data-title="Nashville Hot Chicken"
+                    data-cat="Chicken" data-price="$12.99" data-old="$16.99" data-rating="5.0" data-reviews="210"
+                    data-cal="710" data-time="15"
+                    data-desc="Extra-crispy fried chicken tossed in our signature fiery Nashville spice blend, served with honey drizzle and house pickles on a toasted brioche bun."
+                    data-tags="Spicy,Bestseller,Crispy">
+                    <div class="mimg">
+                        <img src="{% static 'images/menu/3.jpg' %}" alt="Chicken" />
+                        <div class="mbdg"><i class="fas fa-star"></i> Best Seller</div>
+                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="mbody">
+                        <div class="mcat">Chicken</div>
+                        <div class="mtit">Nashville Hot Chicken</div>
+                        <div class="mdesc">Crispy fried chicken in fiery Nashville spice blend with honey drizzle</div>
+                        <div class="mfoot">
+                            <div>
+                                <div class="mprice">$12.99 <small>$16.99</small></div>
+                                <div class="mstars"><i class="fas fa-star"></i> <span
+                                        style="color:#bbb;font-size:.7rem;">(210)</span></div>
+                            </div>
+                            <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 4: Wraps -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="wraps" data-aos="fade-up">
+                <div class="mcard" data-img="{% static 'images/menu/4.jpg' %}" data-title="Loaded Fajita Wrap"
+                    data-cat="Wraps" data-price="$10.99" data-old="" data-rating="4.5" data-reviews="74" data-cal="520"
+                    data-time="10"
+                    data-desc="Grilled chicken strips, saut�ed bell peppers and onions, sour cream, fresh guacamole and salsa wrapped in a warm flour tortilla with melted cheddar."
+                    data-tags="Grilled,Fresh,Mexican">
+                    <div class="mimg">
+                        <img src="{% static 'images/menu/4.jpg' %}" alt="Wrap" />
+                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="mbody">
+                        <div class="mcat">Wraps</div>
+                        <div class="mtit">Loaded Fajita Wrap</div>
+                        <div class="mdesc">Grilled chicken, peppers, sour cream &amp; guacamole in a warm tortilla</div>
+                        <div class="mfoot">
+                            <div>
+                                <div class="mprice">$10.99</div>
+                                <div class="mstars"><i class="fas fa-star"></i> <span
+                                        style="color:#bbb;font-size:.7rem;">(74)</span></div>
+                            </div>
+                            <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 5: Desserts -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="desserts" data-aos="fade-up" data-aos-delay="80">
+                <div class="mcard" data-img="{% static 'images/menu/5.jpg' %}" data-title="Nutella Lava Cake"
+                    data-cat="Desserts" data-price="$8.99" data-old="$11.99" data-rating="4.9" data-reviews="56"
+                    data-cal="390" data-time="8"
+                    data-desc="Warm molten chocolate cake with a gooey Nutella center, served alongside Madagascar vanilla bean ice cream with salted caramel drizzle and fresh berries."
+                    data-tags="Sweet,New,Chocolate">
+                    <div class="mimg">
+                        <img src="{% static 'images/menu/5.jpg' %}" alt="Lava Cake" />
+                        <div class="mbdg new"><i class="fas fa-star"></i> New</div>
+                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="mbody">
+                        <div class="mcat">Desserts</div>
+                        <div class="mtit">Nutella Lava Cake</div>
+                        <div class="mdesc">Molten chocolate cake with Nutella center, vanilla ice cream &amp; caramel
+                        </div>
+                        <div class="mfoot">
+                            <div>
+                                <div class="mprice">$8.99 <small>$11.99</small></div>
+                                <div class="mstars"><i class="fas fa-star"></i> <span
+                                        style="color:#bbb;font-size:.7rem;">(56)</span></div>
+                            </div>
+                            <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- CARD 6: Pasta -->
+            <div class="col-sm-6 col-lg-4 mwrap" data-c="pasta" data-aos="fade-up" data-aos-delay="160">
+                <div class="mcard" data-img="{% static 'images/menu/6.jpg' %}" data-title="Truffle Mushroom Pasta"
+                    data-cat="Pasta" data-price="$16.99" data-old="" data-rating="4.9" data-reviews="88" data-cal="560"
+                    data-time="20"
+                    data-desc="Al dente tagliatelle tossed with mixed wild mushrooms, freshly shaved black truffle, aged parmesan, fresh thyme and a touch of cream in garlic butter."
+                    data-tags="Vegetarian,Chef's Pick,Italian">
+                    <div class="mimg">
+                        <img src="{% static 'images/menu/6.jpg' %}" alt="Pasta" />
+                        <div class="mbdg hot">Chef's Pick</div>
+                        <div class="mhrt"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="mbody">
+                        <div class="mcat">Pasta</div>
+                        <div class="mtit">Truffle Mushroom Pasta</div>
+                        <div class="mdesc">Al dente tagliatelle, wild mushrooms, black truffle, parmesan &amp; thyme
+                        </div>
+                        <div class="mfoot">
+                            <div>
+                                <div class="mprice">$16.99</div>
+                                <div class="mstars"><i class="fas fa-star"></i> <span
+                                        style="color:#bbb;font-size:.7rem;">(88)</span></div>
+                            </div>
+                            <button class="madd" title="View Details"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end #mgrid -->
+        <div class="text-center mt-5"><a href="#" class="btn-red"><i class="fas fa-th-large"></i>View Full Menu</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+         FIX 4 � MENU DETAIL POPUP MODAL
+         ============================================================ -->
+<div id="menuPop">
+    <div class="mpbox">
+        <button class="mpclose" id="mpClose"><i class="fas fa-times"></i></button>
+        <div class="mpimg"><img id="mpImg" src="" alt="" /></div>
+        <div class="mpbody">
+            <div id="mpCat"></div>
+            <div id="mpTitle"></div>
+            <div id="mpStars"></div>
+            <div id="mpDesc"></div>
+            <div id="mpPrice"></div>
+            <div class="mpmeta" id="mpMeta"></div>
+            <div class="mpqty">
+                <button class="mpqbtn" id="mpMinus">-</button>
+                <span class="mpqnum" id="mpQnum">1</span>
+                <button class="mpqbtn" id="mpPlus">+</button>
+                <span style="font-size:.82rem;color:#aaa;margin-left:9px;">portion</span>
+            </div>
+            <div class="mptags" id="mpTags"></div>
+            <button class="mpaddcart" id="mpAddCart"><i class="fas fa-shopping-cart"></i>Add to Cart</button>
+        </div>
+    </div>
+</div>
+<!-- SPECIAL OFFER -->
+<section id="special">
+    <div class="spbg"></div>
+    <div class="container" style="position:relative;z-index:2;">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="sptag"><i class="fas fa-bolt me-1"></i>Limited Time Offer</div>
+                <h2 class="sptitle">Get 30% Off<br />Our Signature<br /><span>Burger</span> Meal</h2>
+                <p class="spdesc">Don't miss our weekend special - grab our award-winning signature burger combo with
+                    loaded fries and a premium shake at an unbeatable price.</p>
+                <div class="cdwrap">
+                    <div class="cditem"><span class="cdnum" id="cdH">08</span><span class="cdlbl">Hours</span></div>
+                    <div class="cditem"><span class="cdnum" id="cdM">45</span><span class="cdlbl">Minutes</span></div>
+                    <div class="cditem"><span class="cdnum" id="cdS">30</span><span class="cdlbl">Seconds</span></div>
+                </div>
+                <a href="#menu" class="btn-red"><i class="fas fa-shopping-cart"></i>Grab the Deal</a>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="spimgw">
+                    <div class="spglow"></div>
+                    <div class="sppbdg"><span class="old">$24.99</span><span class="np">$17.49</span></div>
+                    <img src="{% static 'images/off-img.jpg' %}" alt="Special Burger" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+         GALLERY � FIX 7 (click opens detail popup)
+         ============================================================ -->
+<section id="gallery">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="slbl">Food Showcase</span>
+            <h2 class="stitle">Let's See Our <span>Fast Food</span></h2>
+            <div class="sline"></div>
+        </div>
+        <div class="ggrid" data-aos="fade-up">
+            <div class="gitem" data-gi="0" data-gimg="/static/images/portfolio/work1.jpg" data-gtitle="Gourmet Burgers"
+                data-gdesc="Our award-winning smash burgers, hand-crafted with 100% premium beef, aged cheddar and house-made sauces.">
+                <img src="{% static 'images/portfolio/work1.jpg' %}" alt="Burgers" />
+                <div class="gover"><span><i class="fas fa-expand-alt"></i> Gourmet Burgers</span></div>
+            </div>
+            <div class="gitem" data-gi="1" data-gimg="/static/images/portfolio/work2.jpg" data-gtitle="Wood-Fired Pizza"
+                data-gdesc="Authentic Neapolitan-style pizzas fired at 900deg F in our wood-burning stone oven for the perfect char.">
+                <img src="{% static 'images/portfolio/work2.jpg' %}" alt="Pizza" />
+                <div class="gover"><span><i class="fas fa-expand-alt"></i> Wood-Fired Pizza</span></div>
+            </div>
+            <div class="gitem" data-gi="2" data-gimg="/static/images/portfolio/work3.jpg"
+                data-gtitle="Crispy Fried Chicken"
+                data-gdesc="Double-brined, hand-battered chicken fried to golden perfection using our 15-spice secret blend.">
+                <img src="{% static 'images/portfolio/work3.jpg' %}" alt="Chicken" />
+                <div class="gover"><span><i class="fas fa-expand-alt"></i> Crispy Fried Chicken</span></div>
+            </div>
+            <div class="gitem" data-gi="3" data-gimg="/static/images/portfolio/work4.jpg" data-gtitle="Sweet Desserts"
+                data-gdesc="Handcrafted desserts - from molten lava cakes to artisan ice cream sundaes and seasonal pastries.">
+                <img src="{% static 'images/portfolio/work4.jpg' %}" alt="Desserts" />
+                <div class="gover"><span><i class="fas fa-expand-alt"></i> Sweet Desserts</span></div>
+            </div>
+            <div class="gitem" data-gi="4" data-gimg="/static/images/portfolio/work5.jpg"
+                data-gtitle="Fresh Wraps &amp; Rolls"
+                data-gdesc="Loaded fresh wraps packed with grilled proteins, crunchy vegetables and our house-made sauces.">
+                <img src="{% static 'images/portfolio/work5.jpg' %}" alt="Wraps" />
+                <div class="gover"><span><i class="fas fa-expand-alt"></i> Fresh Wraps &amp; Rolls</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIX 7 � GALLERY POPUP -->
+<div id="galPop">
+    <div class="gpbox">
+        <button class="gpclose" id="gpClose"><i class="fas fa-times"></i></button>
+        <img id="gpImg" src="" alt="" />
+        <div class="gpcap">
+            <h5 id="gpTitle"></h5>
+            <p id="gpDesc"></p>
+        </div>
+        <div class="gpnav">
+            <button id="gpPrev"><i class="fas fa-chevron-left me-1"></i>Prev</button>
+            <button id="gpNext">Next <i class="fas fa-chevron-right ms-1"></i></button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================================================
+         HISTORY � FIX 8 (alternating left/right text)
+         ============================================================ -->
+<section id="history">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="slbl">Our Journey</span>
+            <h2 class="stitle">A History of <span>Restaurant</span></h2>
+            <div class="sline"></div>
+            <p class="sdesc mx-auto" style="max-width:480px;">From humble beginnings to the city's most beloved
+                restaurant - every chapter written with passion.</p>
+        </div>
+        <div class="timeline" data-aos="fade-up">
+            <!-- ODD ? text on LEFT -->
+            <div class="tli">
+                <div class="tl-left">
+                    <div class="tlyear">2012</div>
+                    <h5>Evolution of Restaurants</h5>
+                    <p>Sarab opens its first 20-seat diner on Flavor Street. Within 3 months, lines stretch around the
+                        block every evening as word of our food spreads.</p>
+                </div>
+                <div class="tl-center">
+                    <div class="tldot"></div>
+                </div>
+                <div class="tl-right">
+                    <div class="tlyear">2012</div>
+                    <h5>Evolution of Restaurants</h5>
+                    <p>Sarab opens its first 20-seat diner on Flavor Street. Within 3 months, lines stretch around the
+                        block every evening as word of our food spreads.</p>
+                </div>
+            </div>
+            <!-- EVEN ? text on RIGHT -->
+            <div class="tli">
+                <div class="tl-left">
+                    <div class="tlyear">2015</div>
+                    <h5>Fine Dining &amp; The Concept</h5>
+                    <p>Expanding the vision - we introduced our signature tasting menu and hired our first
+                        Michelin-trained chef, elevating our craft to remarkable new heights.</p>
+                </div>
+                <div class="tl-center">
+                    <div class="tldot"></div>
+                </div>
+                <div class="tl-right">
+                    <div class="tlyear">2015</div>
+                    <h5>Fine Dining &amp; The Concept</h5>
+                    <p>Expanding the vision - we introduced our signature tasting menu and hired our first
+                        Michelin-trained chef, elevating our craft to remarkable new heights.</p>
+                </div>
+            </div>
+            <!-- ODD ? text on LEFT -->
+            <div class="tli">
+                <div class="tl-left">
+                    <div class="tlyear">2019</div>
+                    <h5>Modern Fast Food Origins</h5>
+                    <p>Launched our signature fast-food line, merging gourmet quality with speed and convenience. Within
+                        6 months we won 3 prestigious culinary awards nationally.</p>
+                </div>
+                <div class="tl-center">
+                    <div class="tldot"></div>
+                </div>
+                <div class="tl-right">
+                    <div class="tlyear">2019</div>
+                    <h5>Modern Fast Food Origins</h5>
+                    <p>Launched our signature fast-food line, merging gourmet quality with speed and convenience. Within
+                        6 months we won 3 prestigious culinary awards nationally.</p>
+                </div>
+            </div>
+            <!-- EVEN ? text on RIGHT -->
+            <div class="tli">
+                <div class="tl-left">
+                    <div class="tlyear">2026</div>
+                    <h5>National Expansion</h5>
+                    <p>Now operating in 8 cities across the US with an online delivery platform handling 10,000+ orders
+                        weekly - and growing every single day.</p>
+                </div>
+                <div class="tl-center">
+                    <div class="tldot"></div>
+                </div>
+                <div class="tl-right">
+                    <div class="tlyear">2026</div>
+                    <h5>National Expansion</h5>
+                    <p>Now operating in 8 cities across the US with an online delivery platform handling 10,000+ orders
+                        weekly - and growing every single day.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- CHEFS -->
+<section id="chefs">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="slbl">The Culinary Team</span>
+            <h2 class="stitle">Meet Our Expert <span>Chefs</span></h2>
+            <div class="sline"></div>
+        </div>
+        <div class="row g-4">
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                <div class="chcard">
+                    <div class="chimg">
+                        <img src="{% static 'images/chefs/chef1.png' %}" alt="" />
+                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
+                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="chbody">
+                        <div class="chnm">Ray haan</div>
+                        <div class="chrole">Head Chef</div>
+                        <div class="chexp">12 years experience</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                <div class="chcard">
+                    <div class="chimg">
+                        <img src="{% static 'images/chefs/chef2.png' %}" alt="" />
+                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
+                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="chbody">
+                        <div class="chnm">Nishant Mrz</div>
+                        <div class="chrole">Grill Master</div>
+                        <div class="chexp">8 years experience</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
+                <div class="chcard">
+                    <div class="chimg">
+                        <img src="{% static 'images/chefs/chef3.png' %}" alt="" />
+                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
+                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="chbody">
+                        <div class="chnm">Nishant Singh</div>
+                        <div class="chrole">Pastry Chef</div>
+                        <div class="chexp">10 years experience</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
+                <div class="chcard">
+                    <div class="chimg">
+                        <img src="{% static 'images/chefs/chef4.png' %}" alt="" />
+                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
+                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="chbody">
+                        <div class="chnm">Sital Dulal</div>
+                        <div class="chrole">Pizza Artisan</div>
+                        <div class="chexp">9 years experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- HOURS -->
+<section id="hours">
+    <div class="hrsbg"></div>
+    <div class="container" style="position:relative;z-index:2;">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="slbl" style="color:#a5d6bc;">Opening Hours</span>
+            <h2 class="stitle" style="color:#fff;">We're Open <span style="color:var(--secondary);">For You</span></h2>
+            <div class="sline"></div>
+        </div>
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="hrscard">
+                    <div class="hrsrow">
+                        <span class="hrsday"><i class="fas fa-calendar-day me-2"
+                                style="color:var(--secondary);"></i>Monday - Tuesday</span>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="hdot off"></div>
+                            <span class="hrstime" style="color:#ff6b6b;">Closed</span>
+                        </div>
+                    </div>
+                    <div class="hrsrow">
+                        <span class="hrsday"><i class="fas fa-calendar-day me-2"
+                                style="color:var(--secondary);"></i>Wednesday - Thursday</span>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="hdot on"></div>
+                            <span class="hrstime">09:00 AM - 10:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="hrsrow">
+                        <span class="hrsday"><i class="fas fa-calendar-day me-2"
+                                style="color:var(--secondary);"></i>Friday</span>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="hdot on"></div>
+                            <span class="hrstime">09:00 AM - 11:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="hrsrow">
+                        <span class="hrsday"><i class="fas fa-calendar-day me-2"
+                                style="color:var(--secondary);"></i>Saturday</span>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="hdot on"></div>
+                            <span class="hrstime">10:00 AM - 11:30 PM</span>
+                        </div>
+                    </div>
+                    <div class="hrsrow">
+                        <span class="hrsday"><i class="fas fa-calendar-day me-2"
+                                style="color:var(--secondary);"></i>Sunday</span>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="hdot on"></div>
+                            <span class="hrstime">11:00 AM - 09:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3" data-aos="zoom-in">
+                <div class="hrscta">
+                    <i class="fas fa-truck-fast fa-2x mb-3" style="color:rgba(255,255,255,.8);"></i>
+                    <h4>Order Online</h4>
+                    <p>Get hot food delivered in 25 minutes</p>
+                    <a href="#menu" class="btnw">Order Now ?</a>
+                </div>
+            </div>
+            <div class="col-lg-4" data-aos="fade-left">
+                <div class="hrscard">
+                    <h5
+                        style="color:#fff;margin-bottom:18px;font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;">
+                        <i class="fas fa-map-marker-alt me-2" style="color:var(--secondary);"></i>Find Us
+                    </h5>
+                    <div class="hrsrow"><span class="hrsday"><i class="fas fa-location-dot me-2"
+                                style="color:var(--secondary);"></i>Address</span><span class="hrstime"
+                            style="font-size:.8rem;">42 Flavor Street, NY</span></div>
+                    <div class="hrsrow"><span class="hrsday"><i class="fas fa-phone me-2"
+                                style="color:var(--secondary);"></i>Phone</span><span class="hrstime"
+                            style="font-size:.8rem;">+1 (800) 123-4567</span></div>
+                    <div class="hrsrow"><span class="hrsday"><i class="fas fa-envelope me-2"
+                                style="color:var(--secondary);"></i>Email</span><span class="hrstime"
+                            style="font-size:.8rem;">hello@sarabfood.com</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
