@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import *
 
 # Create your views here.
 
@@ -9,7 +10,14 @@ def about(request):
     return render(request,'core/about.html')
 
 def menu(request):
-    return render(request,'core/menu.html')
+    category = MenuCategory.objects.prefetch_related('items__tags').all()
+    gallery = Gallery.objects.all()
+    
+    context = {
+        'categories': category,
+        'gallery': gallery,
+    }
+    return render(request,'core/menu.html',context)
 
 def chefs(request):
     return render(request,'core/chefs.html')
