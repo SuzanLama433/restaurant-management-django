@@ -20,7 +20,9 @@ def menu(request):
     return render(request,'core/menu.html',context)
 
 def chefs(request):
-    return render(request,'core/chefs.html')
+    chefs = Chefs.objects.filter(is_active = True)
+    
+    return render(request,'core/chefs.html',{'chefs':chefs})
 
 def reservation(request):
     return render(request,'core/reservation.html')

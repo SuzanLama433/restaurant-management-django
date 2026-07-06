@@ -59,3 +59,24 @@ class Gallery(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Chefs(models.Model):
+    name = models.CharField(max_length=50,null=True)
+    role = models.CharField(max_length=90)
+    experience =models.CharField(max_length=50)
+    image = models.ImageField(upload_to='chefs/')
+    display_order = models.PositiveIntegerField(default=0)
+    facebook_url = models.URLField(blank=True)
+    instagram_url = models.URLField(blank=True)
+    linkedin_url = models.URLField(blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ["display_order", "name"]
+        verbose_name = "Chef"
+        verbose_name_plural = "Chefs"
+
+    def __str__(self):
+        return self.name

@@ -12,66 +12,45 @@
             <div class="sline"></div>
         </div>
         <div class="row g-4">
+
+            {% for chef in chefs  %}
             <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
                 <div class="chcard">
                     <div class="chimg">
-                        <img src="{% static 'images/chefs/chef1.png' %}" alt="" />
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
-                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
+
+                        {% if chef.image %}
+                        <img src="{{chef.image.url}}" alt="" />
+                        {% endif %}
+
+                        <div class="chsoc">
+
+                            {% if chef.instagram_url %}
+                            <a href="{{chef.instagram_url}}" target="_blank" ><i class="fab fa-instagram"></i></a>
+                            {% endif %}
+
+
+                            {% if chef.facebook_url %}
+                            <a href="{{chef.facebook_url}}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+
+                            {% endif %}
+
+
+                            {% if chef.linkedin_url %}
+                            <a href="{chef.linkedin_url}" target="_blank"><i class="fab fa-linkedin"></i></a>
+
+                            {% endif %}
+
                         </div>
                     </div>
                     <div class="chbody">
-                        <div class="chnm">Ray haan</div>
-                        <div class="chrole">Head Chef</div>
-                        <div class="chexp">12 years experience</div>
+                        <div class="chnm">{{chef.name}}</div>
+                        <div class="chrole">{{chef.role}}</div>
+                        <div class="chexp">{{chef.experience}}</div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="80">
-                <div class="chcard">
-                    <div class="chimg">
-                        <img src="{% static 'images/chefs/chef2.png' %}" alt="" />
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
-                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="chbody">
-                        <div class="chnm">Nishant Mrz</div>
-                        <div class="chrole">Grill Master</div>
-                        <div class="chexp">8 years experience</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="160">
-                <div class="chcard">
-                    <div class="chimg">
-                        <img src="{% static 'images/chefs/chef3.png' %}" alt="" />
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
-                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="chbody">
-                        <div class="chnm">Nishant Singh</div>
-                        <div class="chrole">Pastry Chef</div>
-                        <div class="chexp">10 years experience</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="240">
-                <div class="chcard">
-                    <div class="chimg">
-                        <img src="{% static 'images/chefs/chef4.png' %}" alt="" />
-                        <div class="chsoc"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i
-                                    class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="chbody">
-                        <div class="chnm">Sital Dulal</div>
-                        <div class="chrole">Pizza Artisan</div>
-                        <div class="chexp">9 years experience</div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </section>

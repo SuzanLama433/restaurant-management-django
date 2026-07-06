@@ -16,3 +16,7 @@ class MenuItemAdmin(admin.ModelAdmin):
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ('title','description')
+    
+@admin.register(Chefs)
+class ChefsAdmin(admin.ModelAdmin):
+    list_display =['name','role']
