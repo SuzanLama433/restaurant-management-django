@@ -62,53 +62,94 @@
                 </div>
             </div>
             <div class="col-lg-8" data-aos="fade-left">
-                <div class="fcard">
-                    <div class="row g-3">
-                        <div class="col-sm-6"><label class="flbl">Full Name *</label><input type="text" class="fctrl"
-                                placeholder="Sujan lama" /></div>
-                        <div class="col-sm-6"><label class="flbl">Phone Number *</label><input type="tel" class="fctrl"
-                                placeholder="+977 ****" /></div>
-                        <div class="col-sm-6"><label class="flbl">Email Address *</label><input type="email"
-                                class="fctrl" placeholder="you@email.com" /></div>
-                        <div class="col-sm-6">
-                            <label class="flbl">Number of Guests *</label>
-                            <select class="fctrl">
-                                <option>1 Person</option>
-                                <option>2 People</option>
-                                <option>3 - 4 People</option>
-                                <option>5 - 6 People</option>
-                                <option>7 -10 People</option>
-                                <option>10+ People</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6"><label class="flbl">Date *</label><input type="date" class="fctrl" />
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="flbl">Time *</label>
-                            <select class="fctrl">
-                                <option>09:00 AM</option>
-                                <option>10:00 AM</option>
-                                <option>11:00 AM</option>
-                                <option>12:00 PM</option>
-                                <option>01:00 PM</option>
-                                <option>02:00 PM</option>
-                                <option>06:00 PM</option>
-                                <option>07:00 PM</option>
-                                <option>08:00 PM</option>
-                                <option>09:00 PM</option>
-                                <option>10:00 PM</option>
-                            </select>
-                        </div>
-                        <div class="col-12"><label class="flbl">Special Requests</label><textarea class="fctrl" rows="3"
-                                placeholder="Allergies, dietary needs, special occasions..."></textarea></div>
-                        <div class="col-12"><button class="btn-red w-100 justify-content-center" id="resBtn"><i
-                                    class="fas fa-calendar-check"></i>Confirm Reservation</button></div>
+                <form id="reservationForm" action="{% url 'reservation' %}" method="post">
+                    {% csrf_token %}
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success mb-3">
+                        {{ message }}
                     </div>
-                    <div class="sucmsg" id="resOk">
-                        <i class="fas fa-check-circle"></i>
-                        <p>Table reserved! We'll confirm via email shortly.</p>
+                    {% endfor %}
+                    {% endif %}
+
+                    <div class="fcard">
+                        <div class="row g-3">
+
+                            <div class="col-sm-6">
+                                <label class="flbl">Full Name *</label>
+                                <input type="text" name="name" class="fctrl" placeholder="Sujan Lama"
+                                    value="{{ request.POST.name }}" required>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="flbl">Phone Number *</label>
+                                <input type="tel" name="phone" class="fctrl" placeholder="+977 98XXXXXXXX"
+                                    value="{{ request.POST.phone }}" required>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="flbl">Email Address *</label>
+                                <input type="email" name="email" class="fctrl" placeholder="you@email.com"
+                                    value="{{ request.POST.email }}" required>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="flbl">Number of Guests *</label>
+                                <select class="fctrl" name="person" required>
+                                    <option value="">Select Guests</option>
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 People</option>
+                                    <option value="3">3 People</option>
+                                    <option value="4">4 People</option>
+                                    <option value="5">5 People</option>
+                                    <option value="6">6 People</option>
+                                    <option value="7">7 People</option>
+                                    <option value="8">8 People</option>
+                                    <option value="9">9 People</option>
+                                    <option value="10">10+ People</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="flbl">Date *</label>
+                                <input type="date" name="date" class="fctrl" value="{{ request.POST.date }}" required>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="flbl">Time *</label>
+                                <select class="fctrl" name="time" required>
+                                    <option value="">Select Time</option>
+                                    <option value="09:00 AM">09:00 AM</option>
+                                    <option value="10:00 AM">10:00 AM</option>
+                                    <option value="11:00 AM">11:00 AM</option>
+                                    <option value="12:00 PM">12:00 PM</option>
+                                    <option value="01:00 PM">01:00 PM</option>
+                                    <option value="02:00 PM">02:00 PM</option>
+                                    <option value="06:00 PM">06:00 PM</option>
+                                    <option value="07:00 PM">07:00 PM</option>
+                                    <option value="08:00 PM">08:00 PM</option>
+                                    <option value="09:00 PM">09:00 PM</option>
+                                    <option value="10:00 PM">10:00 PM</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="flbl">Special Requests</label>
+                                <textarea class="fctrl" name="special_requests" rows="3"
+                                    placeholder="Allergies, dietary needs, birthday celebration, etc.">{{ request.POST.special_requests }}</textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn-red w-100 justify-content-center">
+                                    <i class="fas fa-calendar-check me-2"></i>
+                                    Confirm Reservation
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

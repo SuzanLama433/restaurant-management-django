@@ -80,3 +80,51 @@ class Chefs(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Reservation(models.Model):
+    GUEST_CHOICES =[
+        ('1','1 person'),
+        ('2','2 people'),
+        ("3-4", "3 - 4 People"),
+        ("5-6", "5 - 6 People"),
+        ("7-10", "7 - 10 People"),
+        ("10+", "10+ People")
+    ]
+    TIME_CHOICES = [
+        ("09:00 AM", "09:00 AM"),
+        ("10:00 AM", "10:00 AM"),
+        ("11:00 AM", "11:00 AM"),
+        ("12:00 PM", "12:00 PM"),
+        ("01:00 PM", "01:00 PM"),
+        ("02:00 PM", "02:00 PM"),
+        ("06:00 PM", "06:00 PM"),
+        ("07:00 PM", "07:00 PM"),
+        ("08:00 PM", "08:00 PM"),
+        ("09:00 PM", "09:00 PM"),
+        ("10:00 PM", "10:00 PM"),
+    ]
+    
+    STATUS_CHOICES = [
+    ("Pending", "Pending"),
+    ("Confirmed", "Confirmed"),
+    ("Cancelled", "Cancelled"),
+    ]
+    
+    name = models.CharField(max_length=50)
+    phone = models.IntegerField(null=True)
+    email = models.EmailField()
+    reservation_date = models.DateField()
+    guest = models.CharField(max_length=100,choices=GUEST_CHOICES)
+    reservation_time = models.CharField(max_length=150, choices=TIME_CHOICES)
+    special_requests = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField( max_length=20, choices=STATUS_CHOICES, default="Pending"
+)
+    
+    class Meta:
+        ordering = ["-created_at"]
+        
+    def __str__(self):
+        return self.name
+
+    

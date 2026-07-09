@@ -20,3 +20,7 @@ class GalleryAdmin(admin.ModelAdmin):
 @admin.register(Chefs)
 class ChefsAdmin(admin.ModelAdmin):
     list_display =['name','role']
+
+@admin.register(Reservation)
+class ChefsAdmin(admin.ModelAdmin):
+    list_display =['name']
