@@ -232,3 +232,6 @@ def clear_cart(request):
     
     messages.success(request, 'Cart cleared')
     return redirect('cart')
+
+def log_in(request):
+    return render(request, 'account/login.html')
