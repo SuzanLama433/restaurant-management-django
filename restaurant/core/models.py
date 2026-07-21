@@ -111,7 +111,7 @@ class Reservation(models.Model):
     ]
     
     name = models.CharField(max_length=50)
-    phone = models.IntegerField(null=True)
+    phone = models.CharField(null=True)
     email = models.EmailField()
     reservation_date = models.DateField()
     guest = models.CharField(max_length=100,choices=GUEST_CHOICES)
@@ -128,3 +128,71 @@ class Reservation(models.Model):
         return self.name
 
     
+# contact model
+
+class Contact(models.Model):
+    SUBJECT_CHOICES = [
+        ("General Inquiry", "General Inquiry"),
+        ("Catering & Events", "Catering & Events"),
+        ("Feedback", "Feedback"),
+        ("Partnership", "Partnership"),
+        ("Media & Press", "Media & Press"),
+    ]
+    STATUS_CHOICES = [
+    ("Pending", "Pending"),
+    ("Replied", "Replied"),
+]
+
+    name = models.CharField(max_length=89)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
+    subject = models.CharField(max_length=550, choices=SUBJECT_CHOICES, default='General Inquiry')
+    message = models.TextField()
+    status = models.CharField( max_length=20, choices=STATUS_CHOICES, default="Pending")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    
+    def __str__(self):
+        return self.name
+
+
+# Cart Models
+class Cart(models.Model):
+    session_id = models.CharField(max_length=100, unique=True)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True, blank=True, related_name='cart')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-updated_at']
+    
+    def __str__(self):
+        return f"Cart - {self.session_id}"
+    
+    def get_total(self):
+        """Calculate total cart value"""
+        return sum(item.get_subtotal() for item in self.items.all())
+    
+    def get_total_items(self):
+        """Get total number of items in cart"""
+        return sum(item.quantity for item in self.items.all())
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ('cart', 'menu_item')
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.menu_item.title} x {self.quantity}"
+    
+    def get_subtotal(self):
+        """Calculate subtotal for this item"""
+        return self.menu_item.price * self.quantity

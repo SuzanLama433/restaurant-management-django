@@ -177,6 +177,7 @@ document.querySelectorAll(".catcard").forEach(function (card) {
 
 var menuPop = g("menuPop");
 var mpQty = 1;
+var currentMenuItemId = null;
 
 function openMenuPop(card) {
   var img = card.getAttribute("data-img");
@@ -190,6 +191,10 @@ function openMenuPop(card) {
   var time = card.getAttribute("data-time");
   var desc = card.getAttribute("data-desc");
   var tags = card.getAttribute("data-tags") || "";
+  var id = card.getAttribute("data-id");
+
+  // Store the current menu item ID
+  currentMenuItemId = id;
 
   var mpImgEl = g("mpImg"),
     mpCatEl = g("mpCat"),
@@ -201,28 +206,13 @@ function openMenuPop(card) {
   var full = Math.round(rating),
     empty = 5 - full;
   var mpStarsEl = g("mpStars");
-  if (mpStarsEl)
-    mpStarsEl.innerHTML =
-      '<i class="fas fa-star"></i>'.repeat(full) +
-      "☆".repeat(empty) +
-      ' <span style="color:#bbb;font-size:.78rem;">' +
-      rating +
-      " (" +
-      reviews +
-      " reviews)</span>";
+  if (mpStarsEl) mpStarsEl.innerHTML = '<i class="fas fa-star"></i>'.repeat(full) + "☆".repeat(empty) + ' <span style="color:#bbb;font-size:.78rem;">' + rating + " (" + reviews + " reviews)</span>";
 
   var mpDescEl = g("mpDesc");
   if (mpDescEl) mpDescEl.textContent = desc;
 
   var mpPriceEl = g("mpPrice");
-  if (mpPriceEl)
-    mpPriceEl.innerHTML =
-      price +
-      (old
-        ? '<small style="color:#ccc;text-decoration:line-through;margin-left:8px;font-size:1rem;">' +
-          old +
-          "</small>"
-        : "");
+  if (mpPriceEl) mpPriceEl.innerHTML = price + (old ? '<small style="color:#ccc;text-decoration:line-through;margin-left:8px;font-size:1rem;">' + old + "</small>" : "");
 
   var mpMetaEl = g("mpMeta");
   if (mpMetaEl)
@@ -282,9 +272,7 @@ document.querySelectorAll(".mhrt").forEach(function (btn) {
     var ico = this.querySelector("i");
     ico.classList.toggle("far");
     ico.classList.toggle("fas");
-    this.style.color = ico.classList.contains("fas")
-      ? "var(--primary)"
-      : "#ccc";
+    this.style.color = ico.classList.contains("fas") ? "var(--primary)" : "#ccc";
   });
 });
 
@@ -313,20 +301,69 @@ on("mpMinus", "click", function () {
 
 // Add to cart button
 on("mpAddCart", "click", function () {
-  var cartEl = g("cartCount");
-  if (cartEl) {
-    var cnt = parseInt(cartEl.textContent || "0") + mpQty;
-    cartEl.textContent = cnt;
+  if (!currentMenuItemId) {
+    alert("Error: Menu item not found");
+    return;
   }
+
   var self = this;
-  this.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
-  this.style.background = "linear-gradient(135deg,var(--green),#1a4a35)";
-  setTimeout(function () {
-    closeMenuPop();
-    self.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
-    self.style.background = "";
-  }, 1000);
+
+  // Send AJAX request to add item to cart
+  fetch("/add-to-cart/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCookie("csrftoken"),
+    },
+    body: JSON.stringify({
+      menu_item_id: currentMenuItemId,
+      quantity: mpQty,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // Update cart count
+        var cartEl = g("cartCount");
+        if (cartEl) {
+          cartEl.textContent = data.cart_count;
+        }
+
+        // Show success message
+        self.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
+        self.style.background = "linear-gradient(135deg,var(--green),#1a4a35)";
+
+        // Reset button after 1 second
+        setTimeout(function () {
+          closeMenuPop();
+          self.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+          self.style.background = "";
+        }, 1000);
+      } else {
+        alert("Error: " + (data.message || "Failed to add item to cart"));
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Error adding to cart");
+    });
 });
+
+// Get CSRF token from cookie
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === name + "=") {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
 
 on("resBtn", "click", function () {
   var btn = this;
@@ -366,10 +403,7 @@ document.querySelectorAll(".gitem").forEach(function (item) {
   // collect gallery metadata; prefer the rendered <img>.src to avoid template-tag parsing issues
   var imgEl = item.querySelector("img");
   var gimg = imgEl && imgEl.src ? imgEl.src : item.getAttribute("data-gimg");
-  var gtitle =
-    item.getAttribute("data-gtitle") ||
-    (item.querySelector(".gover span") &&
-      item.querySelector(".gover span").textContent.trim());
+  var gtitle = item.getAttribute("data-gtitle") || (item.querySelector(".gover span") && item.querySelector(".gover span").textContent.trim());
   var gdesc = item.getAttribute("data-gdesc") || "";
   galData.push({ img: gimg, title: gtitle, desc: gdesc });
   // debug: log collected values

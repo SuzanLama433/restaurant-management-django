@@ -24,3 +24,19 @@ class ChefsAdmin(admin.ModelAdmin):
 @admin.register(Reservation)
 class ChefsAdmin(admin.ModelAdmin):
     list_display =['name']
+    
+@admin.register(Contact)
+class ChefsAdmin(admin.ModelAdmin):
+    list_display =['name']
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('session_id', 'user', 'created_at', 'get_total_items')
+    readonly_fields = ('session_id', 'created_at', 'updated_at')
+    
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'cart', 'menu_item', 'quantity', 'get_subtotal')
+    readonly_fields = ('created_at', 'updated_at')
