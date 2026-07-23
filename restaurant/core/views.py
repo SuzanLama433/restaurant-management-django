@@ -6,6 +6,14 @@ from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_GET
 import json
+from django.contrib.auth.models import User
+import re
+from django.contrib import messages
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,6 +23,7 @@ def index(request):
 def about(request):
     return render(request,'core/about.html')
 
+@login_required
 def menu(request):
     category = MenuCategory.objects.prefetch_related('items__tags').all()
     gallery = Gallery.objects.all()
@@ -30,6 +39,8 @@ def chefs(request):
     
     return render(request,'core/chefs.html',{'chefs':chefs})
 
+
+@login_required
 def reservation(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -46,9 +57,7 @@ def reservation(request):
     
     return render(request,'core/reservation.html')
 
-def reviewes(request):
-    return render(request,'core/reviews.html')
-
+@login_required
 def contact(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
@@ -234,4 +243,103 @@ def clear_cart(request):
     return redirect('cart')
 
 def log_in(request):
+    if request.method == "POST":
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
+        remember_me = request.POST.get('checkbox')
+        next_url = request.POST.get('next', '')
+        
+        if not User.objects.filter(username=username).exists():
+            messages.error(request,"Username is not registered yet.")
+        else:
+            # Authenticate the user using username and password.
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+
+                if remember_me:
+                    request.session.set_expiry(36000)
+                else:
+                    request.session.set_expiry(0)
+
+                return redirect(next_url or 'index')
+
+            messages.error(request, "Invalid username or password.")
+
+    # Store the requested URL so it can be preserved after a failed login.
+    next_url = request.GET.get('next', request.POST.get('next', ''))
+    return render(request, 'account/login.html', {'next': next_url})
+
+
+def register(request):
+    if request.method == "POST":
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        cpassword = request.POST.get('cpassword')
+        terms = request.POST.get('terms')
+        
+        if not terms:
+            messages.error(request,'You must agree to the Terms of Service and Privacy Policy.')
+            return redirect('log_in')
+        
+        if password == cpassword:
+            # check username is already exist or not
+            if User.objects.filter(username=username):
+                messages.error(request,'username already exist')
+                return redirect('log_in')
+            #check email is already exist or not
+            if User.objects.filter(email=email):
+                messages.error(request,'email is already exist')
+                return redirect('log_in')
+             # Method 1: Display separate validation messages
+             
+            if not re.search('[A-Z]',password):
+                messages.error(request,'your password must be contain at least one upper case')
+                return redirect('log_in')
+            if not re.search('\d',password):
+                messages.error(request,'your password must be contain at least one digit')
+                return redirect('log_in')
+            try:
+                validate_password(password)
+                User.objects.create_user(
+                    first_name=fname,
+                    last_name=lname,
+                    username=username,
+                    email=email,
+                    password=password
+                    
+                )
+                messages.success(request,'register successfuly')
+                return redirect('log_in')
+            except ValidationError as e :
+                 # Display all password validation errors
+                for i in e.messages:
+                    messages.error(request, i)
+                    
+                return redirect('log_in')
+                
+        else:
+            messages.error(request,"password do not match")
+            return redirect('log_in')
     return render(request, 'account/login.html')
+
+# logout
+
+def log_out(request):
+    username=request.user.username if request.user.is_authenticated else 'anonymous'
+    logout(request)
+    
+    return redirect('index')
+
+def password_change(request):
+    
+    form = PasswordChangeForm(user=request.user,data = request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('log_in')
+    
+
+    return render(request,'account/password_change.html',{'form': form})

@@ -7,7 +7,6 @@ urlpatterns = [
      path('menu/',menu,name='menu'),
      path('chefs/',chefs,name='chefs'),
      path('reservation/',reservation,name='reservation'),
-     path('reviewes/',reviewes,name='reviewes'),
      path('contact/',contact,name='contact'),
      # Cart URLs
      path('cart/', view_cart, name='cart'),
@@ -17,4 +16,7 @@ urlpatterns = [
      path('clear-cart/', clear_cart, name='clear_cart'),
      #login urls
      path('login/',log_in,name='log_in'),
+     path('register/',register,name='register'),
+     path('logout/',log_out,name='log_out'),
+     path('password_change/',password_change,name='password_change')
 ]

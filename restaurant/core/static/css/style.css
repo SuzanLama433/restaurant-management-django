@@ -283,11 +283,7 @@ section {
 .hs2 {
   width: 280px;
   height: 280px;
-  background: radial-gradient(
-    circle,
-    rgba(246, 166, 35, 0.09),
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba(246, 166, 35, 0.09), transparent 70%);
   bottom: -50px;
   left: 8%;
   animation: fsh 10s ease-in-out infinite reverse;
@@ -856,13 +852,7 @@ section {
   inset: 0;
   pointer-events: none;
   opacity: 0.03;
-  background: repeating-linear-gradient(
-    45deg,
-    #fff 0,
-    #fff 1px,
-    transparent 0,
-    transparent 50%
-  );
+  background: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
   background-size: 40px 40px;
 }
 .sptag {
@@ -933,11 +923,7 @@ section {
   width: 360px;
   height: 360px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(246, 166, 35, 0.24),
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba(246, 166, 35, 0.24), transparent 70%);
 }
 .spimgw img {
   position: relative;
@@ -1242,13 +1228,7 @@ section {
   position: absolute;
   inset: 0;
   opacity: 0.05;
-  background: repeating-linear-gradient(
-    45deg,
-    #fff 0,
-    #fff 1px,
-    transparent 0,
-    transparent 50%
-  );
+  background: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%);
   background-size: 28px 28px;
 }
 .hrscard {
@@ -2433,5 +2413,73 @@ footer {
   }
   .stitle {
     font-size: 1.8rem;
+  }
+}
+
+.account-dropdown {
+  width: 280px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 12px;
+  animation: fadeDown 0.25s ease;
+}
+
+.account-header {
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  color: #fff;
+  padding: 24px 20px;
+}
+
+.account-avatar {
+  width: 65px;
+  height: 65px;
+  margin: auto;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.account-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  font-weight: 500;
+  transition: 0.25s;
+}
+
+.account-dropdown .dropdown-item:hover {
+  background: #fff3ec;
+  color: #ff6b35;
+  padding-left: 28px;
+}
+
+.account-dropdown .dropdown-divider {
+  margin: 0;
+}
+
+.logout-item {
+  color: #dc3545;
+}
+
+.logout-item:hover {
+  background: #ffe9eb !important;
+  color: #dc3545 !important;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

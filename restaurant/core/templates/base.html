@@ -88,7 +88,63 @@
               <i class="fab fa-whatsapp me-1"></i>
               Order Now
             </a>
-            <a href="{% url 'log_in' %}" class="btn btn-sm btn-outline-danger ms-2">Login</a>
+            <button class="btn btn-user dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span>👤</span>
+              <span class="user-label"> {% if request.user.is_authenticated %} {{ request.user.username }} {% else %} Account {% endif %} </span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end account-dropdown shadow border-0 p-0">
+              {% if request.user.is_authenticated %}
+
+              <li class="account-header text-center">
+                <div class="account-avatar">{{ request.user.username|first|upper }}</div>
+                <h6 class="mb-1">{{ request.user.username }}</h6>
+                <small class="text-white-50">Welcome Back 👋</small>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'password_change' %}">
+                  <i class="fas fa-key me-2 text-warning"></i>
+                  Change Password
+                </a>
+              </li>
+
+              <li>
+                <hr class="dropdown-divider my-1" />
+              </li>
+
+              <li>
+                <a class="dropdown-item logout-item" href="{% url 'log_out' %}">
+                  <i class="fas fa-right-from-bracket me-2"></i>
+                  Logout
+                </a>
+              </li>
+
+              {% else %}
+
+              <li class="account-header text-center">
+                <div class="account-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+                <h6 class="mb-1">Welcome</h6>
+                <small class="text-white-50">Login to continue</small>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'log_in' %}">
+                  <i class="fas fa-sign-in-alt me-2 text-success"></i>
+                  Login
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{% url 'register' %}">
+                  <i class="fas fa-user-plus me-2 text-primary"></i>
+                  Register
+                </a>
+              </li>
+
+              {% endif %}
+            </ul>
           </div>
         </div>
       </div>

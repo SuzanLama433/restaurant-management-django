@@ -57,6 +57,7 @@ MIDDLEWARE = [
    
 ]
 
+
 ROOT_URLCONF = 'restaurant.urls'
 
 TEMPLATES = [
@@ -128,3 +129,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
 
+LOGIN_URL = 'log_in'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'log_in'
