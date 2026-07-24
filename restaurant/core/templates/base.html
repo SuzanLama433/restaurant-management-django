@@ -89,7 +89,7 @@
               Order Now
             </a>
             <button class="btn btn-user dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <span>👤</span>
+              <span>🗿</span>
               <span class="user-label"> {% if request.user.is_authenticated %} {{ request.user.username }} {% else %} Account {% endif %} </span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end account-dropdown shadow border-0 p-0">
@@ -301,5 +301,26 @@
     {% if messages %} {% for message in messages %}
     <div class="alert alert-success">{{ message }}</div>
     {% endfor %} {% endif %}
+
+     {% if messages %}
+        {% for message in messages %}
+
+        <script>
+            alertify.set('notifier', 'position', 'top-right');
+
+            const tag = "{{ message.tags }}";
+
+            if (tag === "success") {
+                alertify.success("{{ message|escapejs }}");
+            } else if (tag === "error") {
+                alertify.error("{{ message|escapejs }}");
+            } else if (tag === "warning") {
+                alertify.warning("{{ message|escapejs }}");
+            } else {
+                alertify.message("{{ message|escapejs }}");
+            }
+        </script>
+        {% endfor %}
+        {% endif %}
   </body>
 </html>

@@ -14,6 +14,8 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
+from django.core.mail import send_mail ,EmailMessage 
 
 # Create your views here.
 
@@ -52,7 +54,34 @@ def reservation(request):
         special_requests = request.POST.get('special_requests')
 
         Reservation.objects.create(name=name,phone=phone,email=email,guest=person,reservation_date=reservation_date,reservation_time=reservation_time,special_requests=special_requests)
-        
+         # Email subject
+        subject = "🍽️ Your Table Reservation is Confirmed - Suzan Momo Restaurant"
+
+        # Email body
+        message = render_to_string( "core/email_message.html",{
+                    "name": name,
+                    "phone": phone,
+                    "email": email,
+                    "person": person,
+                    "reservation_date": reservation_date,
+                    "reservation_time": reservation_time,
+                    "special_requests": special_requests, },)
+
+            # Sender's email address
+        from_email = "suzanmomorestaurant@gmail.com"
+
+            # Recipient email address
+        recipient_list = [email]
+
+            # Send email
+        send_mail(
+                subject=subject,
+                message=message,
+                from_email=from_email,
+                recipient_list=recipient_list,
+                fail_silently=False,
+            )
+        messages.success(request,"Your table has been reserved successfully. A confirmation email has been sent.")
         return redirect('reservation')
     
     return render(request,'core/reservation.html')
@@ -76,11 +105,11 @@ def contact(request):
             validate_email(email)
         except ValidationError:
             messages.error(request,"Enter a valid email")
-            return render('contact')
+            return redirect('contact')
         #check duplicate email
-        if Contact.objects.filter(email=email).exists():
-            messages.warning(request,'this email is already exist')
-            return render('contact')
+        # if Contact.objects.filter(email=email).exists():
+        #     messages.warning(request,'this email is already exist')
+        #     return redirect('contact')
 
         Contact.objects.create(
             name=name,
@@ -89,11 +118,35 @@ def contact(request):
             subject=subject,
             message=message,
         )
+        # Email subject
+        subject = "📩 We've Received Your Message – Suzan Momo Restaurant"
+        
+        # Email body
+        message = render_to_string( "core/contact_email.html",{
+            "name": name,
+            "phone": phone,
+            "email": email,
+            "subject": subject,
+            'message':message,},)
+        
+        # Sender's email address
+        from_email = "suzanmomorestaurant@gmail.com"
+        
+        # Recipient email address
+        recipient_list = [email]
+        
+        # Send email
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=recipient_list,
+            fail_silently=False,)
 
         messages.success(request, "Your message has been sent successfully!")
         return redirect("contact")
 
-    return render(request, "core/contact.html")
+    return render(request,"core/contact.html")
 
 
 # ==================== CART VIEWS ====================
