@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 import re
 from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required

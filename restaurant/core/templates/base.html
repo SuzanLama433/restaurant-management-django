@@ -43,10 +43,11 @@
           <div class="d-flex align-items-center gap-3">
             <span class="ttag"><i class="fas fa-fire me-1"></i>Free Delivery Today!</span>
             <div class="tsoc">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-tiktok"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.facebook.com/suzann.tamang.204773/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/suzantamang433/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/SuzanLama433" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.youtube.com/@SumannMotovlogs" target="_blank"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.tiktok.com/@suzan_dimdung_tamang433" target="_blank"><i class="fab fa-tiktok"></i></a>
             </div>
           </div>
         </div>
@@ -192,11 +193,11 @@
             <div class="fnm">Suz<span>an</span></div>
             <p class="fdesc">We bring the world's finest flavors together in a fast, friendly, and affordable experience. Every meal crafted with love.</p>
             <div class="fsoc">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-              <a href="#"><i class="fab fa-tiktok"></i></a>
+              <a href="https://www.facebook.com/suzann.tamang.204773/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/suzantamang433/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/SuzanLama433" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.youtube.com/@SumannMotovlogs" target="_blank"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.tiktok.com/@suzan_dimdung_tamang433" target="_blank"><i class="fab fa-tiktok"></i></a>
             </div>
           </div>
           <div class="col-sm-6 col-lg-2">
@@ -300,27 +301,23 @@
     </script>
     {% if messages %} {% for message in messages %}
     <div class="alert alert-success">{{ message }}</div>
+    {% endfor %} {% endif %} {% if messages %} {% for message in messages %}
+
+    <script>
+      alertify.set("notifier", "position", "top-right");
+
+      const tag = "{{ message.tags }}";
+
+      if (tag === "success") {
+        alertify.success("{{ message|escapejs }}");
+      } else if (tag === "error") {
+        alertify.error("{{ message|escapejs }}");
+      } else if (tag === "warning") {
+        alertify.warning("{{ message|escapejs }}");
+      } else {
+        alertify.message("{{ message|escapejs }}");
+      }
+    </script>
     {% endfor %} {% endif %}
-
-     {% if messages %}
-        {% for message in messages %}
-
-        <script>
-            alertify.set('notifier', 'position', 'top-right');
-
-            const tag = "{{ message.tags }}";
-
-            if (tag === "success") {
-                alertify.success("{{ message|escapejs }}");
-            } else if (tag === "error") {
-                alertify.error("{{ message|escapejs }}");
-            } else if (tag === "warning") {
-                alertify.warning("{{ message|escapejs }}");
-            } else {
-                alertify.message("{{ message|escapejs }}");
-            }
-        </script>
-        {% endfor %}
-        {% endif %}
   </body>
 </html>
