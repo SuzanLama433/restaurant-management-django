@@ -149,7 +149,7 @@ def contact(request):
 
 
 # ==================== CART VIEWS ====================
-
+@login_required
 def get_or_create_cart(request):
     """Get or create a cart for the current session/user"""
     if request.user.is_authenticated:
@@ -293,7 +293,7 @@ def clear_cart(request):
     
     messages.success(request, 'Cart cleared')
     return redirect('cart')
-
+# login
 def log_in(request):
     if request.method == "POST":
         username = request.POST.get('username', '').strip()
@@ -322,7 +322,7 @@ def log_in(request):
     next_url = request.GET.get('next', request.POST.get('next', ''))
     return render(request, 'account/login.html', {'next': next_url})
 
-
+# register
 def register(request):
     if request.method == "POST":
         fname = request.POST.get('fname')
@@ -379,13 +379,13 @@ def register(request):
     return render(request, 'account/login.html')
 
 # logout
-
 def log_out(request):
     username=request.user.username if request.user.is_authenticated else 'anonymous'
     logout(request)
     
     return redirect('index')
 
+# password change
 def password_change(request):
     
     form = PasswordChangeForm(user=request.user,data = request.POST)

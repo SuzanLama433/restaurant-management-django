@@ -159,7 +159,7 @@ class Contact(models.Model):
 
 # Cart Models
 class Cart(models.Model):
-    session_id = models.CharField(max_length=100, unique=True)
+    session_id = models.CharField(max_length=100,unique=True,null=True,blank=True)
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True, blank=True, related_name='cart')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
